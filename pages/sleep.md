@@ -4,6 +4,8 @@ queries:
   - events.sql
 ---
 
+The National Sleep Foundation recommends [11-19 hours of sleep per day for newborns](https://www.sleepfoundation.org/baby-sleep), dropping to 12-16 hours per day for infants aged 4-6 months
+
 ```sql sleep_by_day
 select
     date_trunc('day', start_at) as day,
@@ -33,17 +35,22 @@ on actual.day = target.day
 ```
 
 <LineChart
-    data={sleep_actual_vs_target}
+    data={sleep_by_day}
     x=day
-    y=sleep
-    y2=target
+    y=total_hours
+    yMax=20
+    --y2=target
     title="Sleep Hours vs Target"
     labels
     markers
     yAxisTitle=false
-    y2AxisLabels=false
-    y2Gridlines=false
-    y2SeriesType=line
-    y2AxisTitle=false
-    legend
-/>
+    yAxisLabels=false
+    yGridlines=false
+    --y2AxisLabels=false
+    --y2Gridlines=false
+    --y2SeriesType=line
+    --y2AxisTitle=false
+    --legend
+>
+<ReferenceArea yMin=11 yMax=19 label="NSF Target" />
+</LineChart>

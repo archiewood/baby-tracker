@@ -1,10 +1,13 @@
 ---
-title: Baby Tracker 👶🏼
+title: The Data Driven Newborn 👶🏼
+description: A data driven tracker for newborns that ingests data from the Huckleberry App and compares it to various targets and guidelines.
 queries:
   - events.sql
 ---
 
 This project ingests a csv from the [Huckleberry App](https://huckleberrycare.com/) and displays the data from it.
+
+It also compares the data to various targets and guideline values recommended by health professionals.
 
 ```sql total_days
 select 
@@ -15,7 +18,7 @@ from events
 <BigValue
   data={total_days}
   value=count
-  title="Age"
+  title="Current Age"
   fmt='0 "days old"'
 />
 
