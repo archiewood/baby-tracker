@@ -1,33 +1,97 @@
-# Baby Tracker
+---
+title: Baby Tracker 👶🏼
+queries:
+  - events.sql
+---
 
 This project ingests a csv from the [Huckleberry App](https://huckleberrycare.com/) and displays the data from it.
 
-```sql events
+```sql total_days
 select 
-  type,
-  strptime(start, '%Y-%m-%d %H:%M') as "start_at",
-  strptime("end", '%Y-%m-%d %H:%M') as "end_at",
-  date_diff('minute', "start_at", "end_at") as "duration",
-  "Start Condition",
-  "End Condition",
-  notes
+  count(distinct date_trunc('day', strptime(start, '%Y-%m-%d %H:%M'))) as count
 from events
 ```
 
-## Most Recent Events
+<BigValue
+  data={total_days}
+  value=count
+  title="Age"
+  fmt='0 "days old"'
+/>
 
-<DataTable data={events}/>
-
-```sql event_counts
+```sql all_time_daily_kpis
 select
   type,
-  count(*) as count
-from events
+  sum(duration) as total_minutes,
+  sum(duration) / 60 as total_hours,
+  count(*) as count,
+  --daily average
+  sum(duration) / count(distinct date_trunc('day',start_at)) as daily_avg_minutes,
+  daily_avg_minutes / 60 as daily_avg_hours,
+  count /   count(distinct date_trunc('day',start_at)) as daily_avg_count
+from ${events}
 group by type
-order by count desc
 ```
 
-## Event Counts
+{#each all_time_daily_kpis as row}
 
-<DataTable data={event_counts}/>
+{#if row.total_hours !== null} 
 
+{#if row.total_hours < 1}
+<BigValue
+  data={row}
+  value=daily_avg_minutes
+  title="Avg. {row.Type}"
+  fmt='0 "minutes"'
+/>
+{:else}
+
+<BigValue
+  data={row}
+  value=daily_avg_hours
+  title="Avg. {row.Type}"
+  fmt='0.0 "hours"'
+/>
+
+{/if}
+
+{:else}
+
+<BigValue
+  data={row}
+  value=daily_avg_count
+  title="Avg. {row.Type}s"
+  fmt='0 "{row.Type}s"'
+/>
+
+{/if}
+
+{/each}
+
+
+
+
+```sql last_3_days
+select 
+  date_trunc('day',start_at) as day,
+  day + interval '1 day' as next_day,
+from ${events}
+group by day
+order by day desc
+limit 3
+```
+
+
+
+
+## Daily Timelines, Last 3 Days
+
+{#each last_3_days as row}
+
+<!-- {@const events_today = events.where(`start_at between '${fmt(row.day, "YYYY-MM-DD")}' and '${fmt(row.next_day, "YYYY-MM-DD")}'`)} -->
+
+{@const events_today = events}
+
+<Timeline data={events_today} height=80 title={fmt(row.day, "ddd dd")} link="days/{fmt(row.day, 'YYYY-MM-DD')}"/>
+
+{/each}

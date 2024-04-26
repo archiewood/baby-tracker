@@ -5,6 +5,8 @@ queries:
 
 # {params.day}
 
+# <Value data={events_today} value=start_at fmt="ddd DD mmm"/>
+
 ```sql events_today
 select 
   type,
@@ -59,11 +61,5 @@ group by type
 
 {/each}
 
-
-
-
-## Events Today
-
-<DataTable data={events_today} rows=all/>
 
 

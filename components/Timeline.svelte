@@ -3,6 +3,7 @@
     export let height = 80;
     export let title = '';
     export let legend = false;
+    export let link = undefined;
 </script>
 
 {#if legend}
@@ -21,6 +22,7 @@
             text: title,  // Text from the prop
             left: 'left',  // Align it to the left
             top: '45%',
+            link: link
         },
         xAxis: {
             type: 'time',
