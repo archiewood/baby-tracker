@@ -28,87 +28,9 @@ select
 from ${events_today}
 group by type
 ```
-<div class=flex>
-   <div class="bg-[#5470C6] text-white font-semibold mr-2 px-2">Sleep</div>
-   <div class="bg-[#91CC75] text-white font-semibold mr-2 px-2">Feed</div>
-   <div class="bg-[#aba321] text-white font-semibold mr-2 px-2">Diaper</div>
-   <div class="bg-[#EE6666] text-white font-semibold mr-2 px-2">Tummy time</div>
-</div>
 
 
-<ECharts config={
-   {
-    xAxis: {
-        type: 'time',
-        boundaryGap: false
-    },
-    yAxis: {
-        show: false, // This hides the Y-axis
-        type: 'category',
-        data: ['Events'],
-        axisLine: { onZero: false }
-    },
-    grid: {
-        backgroundColor: '#F1F1F1',  // Light grey background within the grid
-        show: true,  // Ensures the grid itself is visible
-        containLabel: false,
-        borderWidth: 0,  // Optionally remove border if not needed
-        right: 0,
-        top: 0,   
-    },
-    tooltip: {
-        trigger: 'item',
-        formatter: function (params) {
-            // Convert timestamps back to more readable date strings
-            var startDate = new Date(params.value[0]).toLocaleString();
-            var endDate = new Date(params.value[1]).toLocaleString();
-            var duration = (params.value[1] - params.value[0]) / 1000 / 60; // Duration in minutes
-            return `<b>${params.name}</b><br/>Start: ${startDate}<br/>End: ${endDate}<br/>Duration: ${duration} minutes<br/>Notes: ${params.data.end_condition}`;
-        }
-    },
-    series: [{
-      name: 'Event Timeline',
-      type: 'custom',
-      renderItem: function (params, api) {
-         var categoryIndex = api.value(2);
-         var start = api.coord([api.value(0), categoryIndex]);
-         var end = api.coord([api.value(1), categoryIndex]);
-         var height = api.size([0, 1])[1];
-         return {
-               type: 'rect',
-               shape: {
-                  x: start[0],
-                  y: start[1] - height / 2,
-                  width: end[0] - start[0],
-                  height: height
-               },
-               style: api.style()
-         };
-      },
-      data: [...events_today].map(item => ({
-         value: [
-               new Date(item.start_at).getTime(), // Start time in milliseconds
-               new Date(item.end_at || new Date(item.start_at).getTime() + 600000).getTime(), // End time or start time + default duration
-               0 // Category index
-         ],
-         itemStyle: {
-               color: 
-                  item.Type === 'Sleep' ? '#5470C6' : 
-                  item.Type === 'Feed' ? '#91CC75' : 
-                  item.Type === 'Diaper' ? '#aba321' : 
-                  '#EE6666'
-         },
-         name: item.Type,
-         end_condition: item['End Condition']
-      }))
-    }]
-}
-}
-   height='80px'
-   renderer=svg
-/>
-
-
+<Timeline data={events_today} height=80 legend/>
 
 
 
