@@ -91,10 +91,8 @@ limit 3
 
 {#each last_3_days as row, i}
 
-{@const events_today = events}
-
 <Timeline   
-  data={events_today.where(`start_at between '${fmt(row.day, "YYYY-MM-DD")}' and '${fmt(row.next_day, "YYYY-MM-DD")}'`)} 
+  data={events.where(`start_at between '${fmt(row.day, "YYYY-MM-DD")} 04:00:00' and '${fmt(row.next_day, "YYYY-MM-DD")} 04:00:00'`)} 
   height=80 
   title={fmt(row.day, "ddd dd")} 
   link="days/{fmt(row.day, 'YYYY-MM-DD')}"
