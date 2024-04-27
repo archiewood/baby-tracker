@@ -4,6 +4,9 @@
     export let title = '';
     export let legend = false;
     export let link = undefined;
+    export let min = undefined;
+    export let max = undefined;
+    export let yAxisLabels = true;
 </script>
 
 {#if legend}
@@ -26,7 +29,9 @@
         },
         xAxis: {
             type: 'time',
-            boundaryGap: false
+            boundaryGap: false,
+            min: min,
+            max: max
         },
         yAxis: {
             show: false, // This hides the Y-axis
@@ -37,7 +42,7 @@
         grid: {
             backgroundColor: '#F1F1F1',  // Light grey background within the grid
             show: true,  // Ensures the grid itself is visible
-            containLabel: false,
+            containLabel: yAxisLabels,  // If true, the labels will be contained within the grid
             borderWidth: 0,  // Optionally remove border if not needed
             right: 0,
             top: 0,   

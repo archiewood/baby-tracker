@@ -1,21 +1,20 @@
 ---
 queries:
    - days: days.sql
+   - events.sql
 ---
 
-# <Value data={events_today} value=start_at fmt="ddd DD mmm"/>
+# <Value data={today} value=day fmt="ddd DD mmm"/>
+
+```sql today
+select * from ${days}
+where day = '${params.day}'
+```
+
 
 ```sql events_today
-select 
-  type,
-  strptime(start, '%Y-%m-%d %H:%M') + interval '4 hours' as "start_at",
-  strptime("end", '%Y-%m-%d %H:%M') + interval '4 hours' as "end_at",
-  date_diff('minute', "start_at", "end_at") as "duration",
-  "Start Condition",
-  "End Condition",
-  notes
-from events
-where start like '${params.day}%'
+select * from ${events}
+where start_at between '${params.day} 04:00:00' and '${fmt(today[0].next_day, "YYYY-MM-DD")} 04:00:00'
 order by start_at
 ```
 
@@ -29,8 +28,13 @@ from ${events_today}
 group by type
 ```
 
-
-<Timeline data={events_today} height=80 legend/>
+<Timeline 
+   data={events_today} 
+   height=80 
+   legend
+   min={params.day}
+   max={fmt(today[0].next_day, "YYYY-MM-DD")}
+/>
 
 
 

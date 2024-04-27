@@ -97,6 +97,9 @@ limit 3
   title={fmt(row.day, "ddd dd")} 
   link="days/{fmt(row.day, 'YYYY-MM-DD')}"
   legend={i === 0}
+  min={fmt(row.day, "YYYY-MM-DD")}
+  max={fmt(row.next_day, "YYYY-MM-DD")}
+  yAxisLabels={false}
 />
 
 {/each}
