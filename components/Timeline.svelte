@@ -3,7 +3,7 @@
 </script>
 <script>
     import { QueryLoad } from '@evidence-dev/core-components';
-    import Timeline from './_Timeline.svelte';
+    import InternalTimeline from './InternalTimeline.svelte';
     export let data;
     // Remove any undefined props (e.g. w/o defaults) to prevent them from being passed
     $: spreadProps = Object.fromEntries(Object.entries($$props).filter(([, v]) => v !== undefined));
@@ -11,7 +11,7 @@
 </script>
 <!-- Pass all the props through-->
 <QueryLoad {data} let:loaded>
-    <Timeline {...spreadProps} data={loaded?.__isQueryStore ? Array.from(loaded) : loaded} {queryID}>
+    <InternalTimeline {...spreadProps} data={loaded?.__isQueryStore ? Array.from(loaded) : loaded} {queryID}>
         <slot />
-    </Timeline>
+    </InternalTimeline>
 </QueryLoad>
