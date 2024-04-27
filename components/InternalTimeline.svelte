@@ -24,7 +24,7 @@
             show: title !== "",  // Only show the title if it's not an empty string
             text: title,  // Text from the prop
             left: 'left',  // Align it to the left
-            top: '45%',
+            top: 'middle',
             link: link
         },
         xAxis: {

@@ -4,7 +4,7 @@ title: Diapers
 
 It's important to ensure your baby is eating enough. 
 
-However, if nursing, you can't track what's going in 🍼. You can track what's coming out, though 💩.
+However, if breastfeeding, you can't track what's going in. You can track what's coming out, though 💩.
 
 In the first few days, a healthy baby will increase the number of diaper changes they need each day. The below values are from [Health Link BC](https://www.healthlinkbc.ca/sites/default/files/documents/BBC_diapering.pdf).
 

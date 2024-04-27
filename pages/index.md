@@ -93,7 +93,7 @@ limit 3
 
 <Timeline   
   data={events.where(`start_at between '${fmt(row.day, "YYYY-MM-DD")} 04:00:00' and '${fmt(row.next_day, "YYYY-MM-DD")} 04:00:00'`)} 
-  height=80 
+  height=60 
   title={fmt(row.day, "ddd dd")} 
   link="days/{fmt(row.day, 'YYYY-MM-DD')}"
   legend={i === 0}
