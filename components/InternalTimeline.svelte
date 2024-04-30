@@ -12,10 +12,10 @@
 
 {#if legend}
     <div class="flex justify-end">
-        <div class="bg-[#5470C6] text-white font-semibold mr-2 px-2">Sleep</div>
-        <div class="bg-[#91CC75] text-white font-semibold mr-2 px-2">Feed</div>
-        <div class="bg-[#aba321] text-white font-semibold mr-2 px-2">Diaper</div>
-        <div class="bg-[#EE6666] text-white font-semibold mr-2 px-2">Tummy time</div>
+        <div class="bg-[#bfdbf7] text-white font-semibold mr-2 px-2">Sleep</div>
+        <div class="bg-[#488f96] text-white font-semibold mr-2 px-2">Feed</div>
+        <div class="bg-[#ffc857] text-white font-semibold mr-2 px-2">Diaper</div>
+        <div class="bg-[#923d59] text-white font-semibold mr-2 px-2">Tummy time</div>
     </div>
 {/if} 
 
@@ -25,7 +25,7 @@
             show: title !== "",  // Only show the title if it's not an empty string
             text: title,  // Text from the prop
             left: 'left',  // Align it to the left
-            top: 'middle',
+            top: yAxisLabels ? '30%' : 'middle',
             link: link
         },
         xAxis: {
@@ -43,9 +43,10 @@
         grid: {
             backgroundColor: '#F1F1F1',  // Light grey background within the grid
             show: true,  // Ensures the grid itself is visible
-            containLabel: yAxisLabels,  // If true, the labels will be contained within the grid
+            containLabel: false,  // If true, the labels will be contained within the grid
             borderWidth: 0,  // Optionally remove border if not needed
             right: 0,
+            bottom: yAxisLabels ? 18 : 0,
             top: 0,   
             // if title add left padding
             left: title !== "" ? title.length * 10 : 0
@@ -87,10 +88,10 @@
                 ],
                 itemStyle: {
                     color: 
-                        item.Type === 'Sleep' ? '#5470C6' : 
-                        item.Type === 'Feed' ? '#91CC75' : 
-                        item.Type === 'Diaper' ? '#aba321' : 
-                        '#EE6666'
+                        item.Type === 'Sleep' ? '#bfdbf7' : 
+                        item.Type === 'Feed' ? '#488f96' : 
+                        item.Type === 'Diaper' ? '#ffc857' : 
+                        '#923d59'
                 },
                 name: item.Type,
                 end_condition: item['End Condition']

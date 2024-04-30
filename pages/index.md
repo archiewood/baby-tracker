@@ -5,9 +5,7 @@ queries:
   - events.sql
 ---
 
-This project ingests a csv from the [Huckleberry App](https://huckleberrycare.com/) and displays the data from it.
-
-It also compares the data to various targets and guideline values recommended by health professionals.
+This project ingests and displays data from the [Huckleberry App](https://huckleberrycare.com/). It compares the data to targets and guidelines recommended by health professionals.
 
 ```sql total_days
 select 
@@ -81,7 +79,7 @@ select
 from ${events}
 group by day
 order by day desc
-limit 3
+limit ${inputs.days_limit.value}
 ```
 
 
@@ -89,17 +87,30 @@ limit 3
 
 ## Daily Timelines, Last 3 Days
 
+<Dropdown name=days_limit value=3 title="Data Range">
+  <DropdownOption value=3 valueLabel="Last 3 days"/>
+  <DropdownOption value=7 valueLabel="Last 7 days"/>
+  <DropdownOption value=14 valueLabel="Last 14 days"/>
+</Dropdown>
+  
+  
+
+
+
+
+
+
 {#each last_3_days as row, i}
 
 <Timeline   
   data={events.where(`start_at between '${fmt(row.day, "YYYY-MM-DD")} 04:00:00' and '${fmt(row.next_day, "YYYY-MM-DD")} 04:00:00'`)} 
-  height=60 
+  height={inputs.days_limit.value < 4 ? 80 : 40}
   title={fmt(row.day, "ddd dd")} 
   link="days/{fmt(row.day, 'YYYY-MM-DD')}"
   legend={i === 0}
   min={fmt(row.day, "YYYY-MM-DD")}
   max={fmt(row.next_day, "YYYY-MM-DD")}
-  yAxisLabels={false}
+  yAxisLabels={inputs.days_limit.value < 4}
 />
 
 {/each}
