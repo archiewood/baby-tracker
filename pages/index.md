@@ -1,6 +1,6 @@
 ---
-title: The Data Driven Newborn 👶🏼
-description: A data driven tracker for newborns that ingests data from the Huckleberry App and compares it to various targets and guidelines.
+title: The Data Driven Dad 👶🏼
+description: A newborn tracker that ingests data from the Huckleberry App and compares to various health guidelines.
 queries:
   - events.sql
 ---
