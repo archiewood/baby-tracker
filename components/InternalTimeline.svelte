@@ -7,6 +7,7 @@
     export let min = undefined;
     export let max = undefined;
     export let yAxisLabels = true;
+    import { ECharts } from "@evidence-dev/core-components";
 </script>
 
 {#if legend}
