@@ -54,3 +54,38 @@ on actual.day = target.day
 >
 <ReferenceArea yMin=11 yMax=19 label="NSF Target" labelPosition=topRight/>
 </LineChart>
+
+## Average Sleep Duration and Count
+
+```sql sleep_kpis
+select
+    date_trunc('day', start_at) as day,
+    sum(duration) as total_minutes,
+    sum(duration) / 60 as total_hours,
+    count(*) as number_of_sleeps,
+    --daily average
+    total_minutes / number_of_sleeps as daily_avg_minutes,
+from ${events}
+where type = 'Sleep'
+and day>='2024-04-21'
+group by day
+```
+
+<LineChart
+    data={sleep_kpis}
+    x=day
+    y=daily_avg_minutes
+    yGridlines=false
+    yAxisLabels=false
+    yAxisTitle=false
+    yFmt=num0
+    labels
+    y2=number_of_sleeps
+    y2Max=30
+    y2Gridlines=false
+    y2AxisLabels=false
+    y2AxisTitle=false
+    
+/>
+
+
