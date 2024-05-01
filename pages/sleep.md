@@ -64,7 +64,7 @@ select
     sum(duration) / 60 as total_hours,
     count(*) as number_of_sleeps,
     --daily average
-    total_minutes / number_of_sleeps as daily_avg_minutes,
+    total_minutes / number_of_sleeps as avg_minutes_per_sleep
 from ${events}
 where type = 'Sleep'
 and day>='2024-04-21'
@@ -74,7 +74,7 @@ group by day
 <LineChart
     data={sleep_kpis}
     x=day
-    y=daily_avg_minutes
+    y=avg_minutes_per_sleep
     yGridlines=false
     yAxisLabels=false
     yAxisTitle=false
@@ -85,7 +85,6 @@ group by day
     y2Gridlines=false
     y2AxisLabels=false
     y2AxisTitle=false
-    
 />
 
 
