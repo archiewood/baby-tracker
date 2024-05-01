@@ -85,7 +85,7 @@ limit ${inputs.days_limit.value}
 
 
 
-## Daily Timelines, Last 3 Days
+<!-- ## Daily Timelines, Last 3 Days -->
 
 <Dropdown name=days_limit value=3 title="Data Range">
   <DropdownOption value=3 valueLabel="Last 3 days"/>

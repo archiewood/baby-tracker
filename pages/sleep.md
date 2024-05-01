@@ -52,5 +52,5 @@ on actual.day = target.day
     --y2AxisTitle=false
     --legend
 >
-<ReferenceArea yMin=11 yMax=19 label="NSF Target" />
+<ReferenceArea yMin=11 yMax=19 label="NSF Target" labelPosition=topRight/>
 </LineChart>
