@@ -1,8 +1,12 @@
 ---
-title: Sleep
+title: Sleep | The Data Driven Dad 👶🏼
+hide_title: true
+description: Sleep tracking and analysis for my newborn baby.
 queries:
   - events.sql
 ---
+
+# Sleep
 
 The National Sleep Foundation recommends [11-19 hours of sleep per day for newborns](https://www.sleepfoundation.org/baby-sleep), dropping to 12-16 hours per day for infants aged 4-6 months
 
