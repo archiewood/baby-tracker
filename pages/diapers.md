@@ -1,6 +1,23 @@
 ---
 title: Diapers
+queries:
+- events.sql
 ---
+
+```sql diaper_events
+select
+    start_at,
+    "End Condition" as condition,
+    case 
+        when condition ilike '%both%' then 'Both' 
+        when condition ilike '%pee%' then '💧' 
+        when condition ilike '%poo%' then '💩' 
+        else 'Unknown'
+    end as type
+from ${events}
+where type = 'Diaper'
+```
+
 
 It's important to ensure your baby is eating enough. 
 
@@ -8,12 +25,11 @@ However, if breastfeeding, you can't track what's going in. You can track what's
 
 In the first few days, a healthy baby will increase the number of diaper changes they need each day. The below values are from [Health Link BC](https://www.healthlinkbc.ca/sites/default/files/documents/BBC_diapering.pdf).
 
-```sql diapers
+```sql daily_diapers
 select
-    date_trunc('day', strptime(start, '%Y-%m-%d %H:%M')) as day,
+    date_trunc('day', start_at) as day,
     count(*) as count
-from events
-where "Type" = 'Diaper'
+from ${diaper_events}
 group by all
 ```
 
@@ -30,7 +46,7 @@ select
     actual.day,
     actual.count as diapers,
     target.count as target
-from ${diapers} as actual
+from ${daily_diapers} as actual
 left join ${diapers_target} as target
 on actual.day = target.day
 ```
@@ -53,5 +69,26 @@ on actual.day = target.day
     legend
 />
 
+## Unneccessary Detail
 
+```sql daily_diapers_by_type
+select
+    date_trunc('day', start_at) as day,
+    type,
+    count(*) as count
+from ${diaper_events}
+group by day, type
+```
+
+<BarChart
+    data={daily_diapers_by_type}
+    x=day
+    y=count
+    series=type
+    colorPalette={['#FFD700', '#8B4513', '#008000']}
+    title="Diapers by Type"
+    labels
+    yGridlines=false
+    yAxisLabels=false   
+/>
 
