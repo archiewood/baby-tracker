@@ -101,6 +101,30 @@ where type = 'Sleep'
 group by all
 ```
 
+```sql avg_sleep_night_vs_day
+select
+    sleep_type,
+    avg(total_hours) as avg_hours
+from ${sleep_night_vs_day}
+group by sleep_type
+```
+
+{#each avg_sleep_night_vs_day as row, i}
+
+<BigValue
+    data={row}
+    value=avg_hours
+    title={row.sleep_type}
+    fmt='0.0 "hours"'
+/>
+
+{/each}
+
+
+
+
+
+
 <BarChart
     data={sleep_night_vs_day}
     x=day
