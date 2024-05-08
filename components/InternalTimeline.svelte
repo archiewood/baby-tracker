@@ -46,7 +46,7 @@
             containLabel: false,  // If true, the labels will be contained within the grid
             borderWidth: 0,  // Optionally remove border if not needed
             right: 0,
-            bottom: yAxisLabels ? 18 : 0,
+            bottom: yAxisLabels ? 20 : 0,
             top: 0,   
             // if title add left padding
             left: title !== "" ? title.length * 10 : 0
