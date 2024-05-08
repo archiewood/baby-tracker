@@ -88,4 +88,27 @@ group by day
     y2AxisTitle=false
 />
 
+## Sleep Night vs Day
 
+```sql sleep_night_vs_day
+select
+    date_trunc('day', start_at) as day,
+    sum(duration) as total_minutes,
+    sum(duration) / 60 as total_hours,
+    sleep_type
+from ${events}
+where type = 'Sleep'
+group by all
+```
+
+<BarChart
+    data={sleep_night_vs_day}
+    x=day
+    y=total_hours
+    series=sleep_type
+    labels
+    yGridlines=false
+    yAxisLabels=false
+    yAxisTitle=false
+    yFmt=num0
+/>
