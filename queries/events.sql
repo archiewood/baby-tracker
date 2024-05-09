@@ -12,4 +12,6 @@ select
   "End Condition",
   notes
 from events
+where "Type" != 'Growth' 
+  and "Type" != 'Pump'
 GROUP BY all
