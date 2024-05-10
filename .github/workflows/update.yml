@@ -1,5 +1,8 @@
 name: Update CSV and Open PR
 
+permissions:
+    contents: write
+
 on:
   schedule:
     # Run every day at 5 AM UTC
