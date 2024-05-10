@@ -42,14 +42,19 @@ jobs:
       run: |
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+        git add sources/huckleberry/events.csv
+        COMMIT_MESSAGE="Pre-merge commit $(date +'%Y-%m-%d %H:%M:%S')"
+        git commit -m "$COMMIT_MESSAGE" || echo "No changes to commit"
+        # Fetch and try to update from the scheduled-update branch
         git fetch origin scheduled-update:scheduled-update || true
         git switch scheduled-update || git switch -c scheduled-update
         git merge origin/scheduled-update --no-edit || true
+        # Re-add after merge to ensure latest changes are captured
         git add sources/huckleberry/events.csv
         COMMIT_MESSAGE="Update CSV $(date +'%Y-%m-%d %H:%M:%S')"
         git commit -m "$COMMIT_MESSAGE" || echo "No changes to commit"
         git push origin scheduled-update
-
+        
     # Open a pull request with the changes
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
