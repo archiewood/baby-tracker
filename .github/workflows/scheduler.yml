@@ -3,6 +3,8 @@ name: Scheduled Data Export
 on:
   schedule:
     - cron: '0 * * * *'  # Runs at the start of every hour
+  workflow_dispatch:  # Enables manual triggering of the workflow
+
 
 jobs:
   export-data:
