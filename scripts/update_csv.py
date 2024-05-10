@@ -7,6 +7,9 @@ import pandas as pd
 import re
 import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Read secrets from environment variables
 username = os.getenv('EMAIL_USERNAME')
@@ -97,7 +100,7 @@ df.drop('Links', axis=1, inplace=True)
 download_link=df["Link 2"].iloc[-1]
 
 # Update the csv
-save_path = '../sources/huckleberry/events.csv'
+save_path = 'sources/huckleberry/events.csv'
 
 # Ensure the directory exists
 os.makedirs(os.path.dirname(save_path), exist_ok=True)
