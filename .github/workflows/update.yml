@@ -1,0 +1,54 @@
+name: Update CSV and Open PR
+
+on:
+  schedule:
+    # Run every day at 5 AM UTC
+    - cron: '10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update_csv:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Setup Python environment
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas requests imaplib email re os
+
+    # Run the script
+    - name: Execute update script
+      env:
+        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        IMAP_URL: ${{ secrets.IMAP_URL }}
+      run: python ../scripts/update_csv.py
+
+    # Commit changes if any and create a new branch
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+        git add ../sources/huckleberry/events.csv
+        COMMIT_MESSAGE="Update CSV $(date +'%Y-%m-%d %H:%M:%S')"
+        git commit -m "$COMMIT_MESSAGE"
+        git push origin HEAD:scheduled-update
+
+    # Open a pull request with the changes
+    - name: Create Pull Request
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: "scheduled-update"
+        destination_branch: "main"  # or any base branch you use
+        pr_title: "Updated CSV with latest data"
+        pr_body: "Please review the changes to the CSV file."
+        github_token: ${{ secrets.GITHUB_TOKEN }}
