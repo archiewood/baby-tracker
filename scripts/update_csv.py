@@ -7,9 +7,6 @@ import pandas as pd
 import re
 import os
 import requests
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Read secrets from environment variables
 username = os.getenv('EMAIL_USERNAME')
