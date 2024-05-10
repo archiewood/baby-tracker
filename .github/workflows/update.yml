@@ -2,6 +2,7 @@ name: Update CSV and Open PR
 
 permissions:
     contents: write
+    pull-requests: write
 
 on:
   schedule:
