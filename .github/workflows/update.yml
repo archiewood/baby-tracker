@@ -54,7 +54,7 @@ jobs:
         COMMIT_MESSAGE="Update CSV $(date +'%Y-%m-%d %H:%M:%S')"
         git commit -m "$COMMIT_MESSAGE" || echo "No changes to commit"
         git push origin scheduled-update
-        
+
     # Open a pull request with the changes
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
@@ -63,4 +63,4 @@ jobs:
         destination_branch: "main"  # or any base branch you use
         pr_title: "Updated CSV with latest data"
         pr_body: "Please review the changes to the CSV file."
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
