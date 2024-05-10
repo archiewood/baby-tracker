@@ -31,7 +31,7 @@ jobs:
         EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
         EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         IMAP_URL: ${{ secrets.IMAP_URL }}
-      run: python ../scripts/update_csv.py
+      run: python scripts/update_csv.py
 
     # Commit changes if any and create a new branch
     - name: Commit and Push Changes
