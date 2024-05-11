@@ -2,6 +2,7 @@ name: Update CSV and Open PR
 
 permissions:
     contents: write
+    pull-requests: write
 
 on:
   schedule:
@@ -42,9 +43,17 @@ jobs:
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
         git add sources/huckleberry/events.csv
+        COMMIT_MESSAGE="Pre-merge commit $(date +'%Y-%m-%d %H:%M:%S')"
+        git commit -m "$COMMIT_MESSAGE" || echo "No changes to commit"
+        # Fetch and try to update from the scheduled-update branch
+        git fetch origin scheduled-update:scheduled-update || true
+        git switch scheduled-update || git switch -c scheduled-update
+        git merge origin/scheduled-update --no-edit || true
+        # Re-add after merge to ensure latest changes are captured
+        git add sources/huckleberry/events.csv
         COMMIT_MESSAGE="Update CSV $(date +'%Y-%m-%d %H:%M:%S')"
-        git commit -m "$COMMIT_MESSAGE"
-        git push origin HEAD:scheduled-update
+        git commit -m "$COMMIT_MESSAGE" || echo "No changes to commit"
+        git push origin scheduled-update
 
     # Open a pull request with the changes
     - name: Create Pull Request
@@ -54,4 +63,4 @@ jobs:
         destination_branch: "main"  # or any base branch you use
         pr_title: "Updated CSV with latest data"
         pr_body: "Please review the changes to the CSV file."
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
