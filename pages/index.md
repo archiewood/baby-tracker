@@ -3,6 +3,8 @@ title: The Data Driven Dad 👶🏼
 description: A newborn tracker that ingests data from the Huckleberry App and compares to various health guidelines.
 queries:
   - events.sql
+og:
+  image: /screengrab.png
 ---
 
 This project ingests and displays data from the [Huckleberry App](https://huckleberrycare.com/). It compares the data to targets and guidelines recommended by health professionals.
