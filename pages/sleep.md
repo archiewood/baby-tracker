@@ -7,6 +7,15 @@ queries:
 
 The National Sleep Foundation recommends [11-19 hours of sleep per day for newborns](https://www.sleepfoundation.org/baby-sleep), dropping to 12-16 hours per day for infants aged 4-6 months
 
+```sql dates
+select
+    date_trunc('day', start_at) as day
+from ${events}
+group by day
+```
+
+<DateRange name=date_range data={dates} dates=day/>
+
 ```sql sleep_by_day
 select
     date_trunc('day', start_at) as day,
@@ -14,8 +23,13 @@ select
     sum(duration) / 60 as total_hours,
 from ${events}
 where type = 'Sleep'
+and day between '${inputs.date_range.start}' and '${inputs.date_range.end}'
 group by day
 ```
+
+
+
+
 
 ```sql sleep_targets
 select 
@@ -23,6 +37,7 @@ select
     target_mins::int / 60 as target_hours
 from targets
 where Type = 'Sleep'
+and day between '${inputs.date_range.start}' and '${inputs.date_range.end}'
 ```
 
 ```sql sleep_actual_vs_target
@@ -33,6 +48,7 @@ select
 from ${sleep_by_day} as actual
 left join ${sleep_targets} as target
 on actual.day = target.day
+where actual.day between '${inputs.date_range.start}' and '${inputs.date_range.end}'
 ```
 
 <LineChart
@@ -68,7 +84,7 @@ select
     total_minutes / number_of_sleeps as avg_minutes_per_sleep
 from ${events}
 where type = 'Sleep'
-and day>='2024-04-21'
+and day between '${inputs.date_range.start}' and '${inputs.date_range.end}'
 group by day
 ```
 
@@ -98,6 +114,7 @@ select
     sleep_type
 from ${events}
 where type = 'Sleep'
+and day between '${inputs.date_range.start}' and '${inputs.date_range.end}'
 group by all
 ```
 
