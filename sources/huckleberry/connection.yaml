@@ -1,3 +1,5 @@
 # This file was automatically generated
 name: huckleberry
 type: csv
+options:
+  options: header=true
