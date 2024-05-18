@@ -1,7 +1,8 @@
 <script>
+  import '@evidence-dev/tailwind/fonts.css';
+  import '../app.css'; 
   import { EvidenceDefaultLayout } from '@evidence-dev/core-components';
-  import site from '$lib/config/site';
-  import '@evidence-dev/core-components/global.css';
+  export let data;
 </script>
 
 <EvidenceDefaultLayout githubRepo="https://github.com/your-repo-url">
