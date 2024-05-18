@@ -27,6 +27,7 @@ group by day
     yGridlines=false
     yAxisLabels=false
     handleMissing=zero
+    githubRepo="https://github.com/archiewood/baby-tracker"
 >
 <ReferenceLine y=30 label="Recommended Level" />
 </BarChart>
