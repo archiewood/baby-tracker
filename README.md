@@ -1,74 +1,25 @@
-# Evidence Template Project
+# The Data Driven Dad 👶🏼
 
-Welcome to Evidence. Use this project template to get started.
-
-## Get Started from VS Code
-
-The easiest way to get started is using the [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=evidence-dev.evidence), which copies this template.
-
-1. Install the extension from the VS Code Marketplace
-2. Open the Command Palette (Ctrl/Cmd + Shift + P) and enter `Evidence: New Evidence Project`
-3. Click `Start Evidence` in the bottom status bar
-
-## Get Started using the CLI
-
-```bash
-npx degit evidence-dev/template my-project
-cd my-project 
-npm install 
-npm run sources
-npm run dev 
-```
-
-Check out the docs for [alternative install methods](https://docs.evidence.dev/getting-started/install-evidence) including Docker, Github Codespaces, and alongside dbt.
-
-
-## Codespaces
-
-If you are using this template in Codespaces, click the `Start Evidence` button in the bottom status bar.
-
-Alternatively, use the following commands to get started:
-
-```bash
-npm install
-npm run sources
-npm run dev -- --host 0.0.0.0
-```
-
-See [the CLI docs](https://docs.evidence.dev/cli/) for more command information.
-
-**Note:** Codespaces is much faster on the Desktop app. After the Codespace has booted, select the hamburger menu → Open in VS Code Desktop.
-
-## Connection Issues
-
-If you see `✗ orders_by_month Missing database credentials`, you need to add the connection to the demo database:
-
-1. Open the settings menu at [localhost:3000/settings](http://localhost:3000/settings)
-2. select `DuckDB`
-3. enter `needful_things`
-4. select `.duckdb` and save
+The Data Driven Dad is a newborn tracking app that ingests data from the Huckleberry App and compares it to various health guidelines. It provides interactive dashboards and automated insights to help new parents monitor their baby's development.
 
 ## Key Features
 
-- Interactive dashboards built using Evidence and Vega
-- Ability to filter and slice data by various dimensions like date range, product category, region, etc.
-- Automated insights that surface interesting trends and anomalies 
-- Shareable data stories that combine visualizations, text, and images
+- Interactive dashboards for tracking sleep, feeding, diaper changes, and more 
+- Ability to filter data by custom date ranges
+- Comparison of actual data to recommended health guidelines
+- Shareable links to specific dashboards and date ranges
+- Automated insights highlighting key trends and milestones
 
 ## Getting Started
 
-1. Clone this repository
-2. Install dependencies with `npm install` 
-3. Run `npm run sources` to configure the database connection
-4. Start the development server with `npm run dev`
-5. Open `localhost:3000` in your browser
-
-## Documentation
-
-- [User Guide](docs/user-guide.md)
-- [Database Schema](docs/schema.md)
-- [Metrics Definitions](docs/metrics.md) 
+1. Sign up for an account at [datadrivedad.com](https://datadrivedad.com)  
+2. Connect your Huckleberry account to import your tracking data
+3. Explore the various dashboards to view trends and comparisons to guidelines
+4. Use the date picker to filter the data to a specific range
+5. Share links to dashboards with your pediatrician or other caregivers
 
 ## Support
 
-If you have any questions or feedback, please open an issue on this repository or contact support@company.com
+If you have any questions or feedback, please email us at support@datadrivedad.com. We'd love to hear from you!
+
+You can also check out our [FAQ](https://datadrivedad.com/faq) for answers to common questions.
