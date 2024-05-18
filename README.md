@@ -20,6 +20,8 @@ npm run sources
 npm run dev 
 ```
 
+•*Note:** Remember to run `npm run sources` before running the build command (`npm run build`) to ensure all data sources are set up correctly.
+
 Check out the docs for [alternative install methods](https://docs.evidence.dev/getting-started/install-evidence) including Docker, Github Codespaces, and alongside dbt.
 
 
