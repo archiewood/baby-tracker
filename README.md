@@ -48,9 +48,27 @@ If you see `✗ orders_by_month Missing database credentials`, you need to add t
 3. enter `needful_things`
 4. select `.duckdb` and save
 
-## Learning More
+## Key Features
 
-- [Docs](https://docs.evidence.dev/)
-- [Github](https://github.com/evidence-dev/evidence)
-- [Slack Community](https://slack.evidence.dev/)
-- [Evidence Home Page](https://www.evidence.dev)
+- Interactive dashboards built using Evidence and Vega
+- Ability to filter and slice data by various dimensions like date range, product category, region, etc.
+- Automated insights that surface interesting trends and anomalies 
+- Shareable data stories that combine visualizations, text, and images
+
+## Getting Started
+
+1. Clone this repository
+2. Install dependencies with `npm install` 
+3. Run `npm run sources` to configure the database connection
+4. Start the development server with `npm run dev`
+5. Open `localhost:3000` in your browser
+
+## Documentation
+
+- [User Guide](docs/user-guide.md)
+- [Database Schema](docs/schema.md)
+- [Metrics Definitions](docs/metrics.md) 
+
+## Support
+
+If you have any questions or feedback, please open an issue on this repository or contact support@company.com
