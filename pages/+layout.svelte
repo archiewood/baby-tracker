@@ -6,5 +6,5 @@
 </script>
 
 <EvidenceDefaultLayout {data} githubRepo="https://github.com/archiewood/baby-tracker">
-  <slot />  
+  <slot slot="content" />
 </EvidenceDefaultLayout>
