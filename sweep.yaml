@@ -1,0 +1,7 @@
+description: >
+  archiewood/baby-tracker is an Evidence.dev project. Evidence allows you 
+  to write code in Markdown with inline SQL, and a suite of pre-built 
+  components. The underlying web framework is svelte, so valid svelte syntax
+  is also valid. Data is ingested from csvs in sources/huckleberry/ and can
+  then be queried from markdown. Queries in /queries can be imported onto any
+  page by referencing them in frontmatter.
