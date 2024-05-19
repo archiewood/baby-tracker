@@ -5,6 +5,6 @@
   export let data;
 </script>
 
-<EvidenceDefaultLayout githubRepo="https://github.com/username/repo-name">
+<EvidenceDefaultLayout githubRepo="https://github.com/archiewood/baby-tracker">
   <slot />  
 </EvidenceDefaultLayout>
