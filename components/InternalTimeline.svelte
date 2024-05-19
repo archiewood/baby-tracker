@@ -54,11 +54,10 @@
         tooltip: {
             trigger: 'item',
             formatter: function (params) {
-                // Convert timestamps back to more readable date strings
-                var startDate = new Date(params.value[0]).toLocaleString();
-                var endDate = new Date(params.value[1]).toLocaleString();
-                var duration = (params.value[1] - params.value[0]) / 1000 / 60; // Duration in minutes
-                return `<b>${params.name}</b><br/>Start: ${startDate}<br/>End: ${endDate}<br/>Duration: ${duration} minutes<br/>Notes: ${params.data.end_condition}`;
+                // Display date and weight/height value  
+                var date = new Date(params.value[0]).toLocaleString();
+                var value = params.value[1];
+                return `<b>${params.name}</b><br/>Date: ${date}<br/>Value: ${value}`;
             }
         },
         series: [{
@@ -82,20 +81,15 @@
             },
             data: [...data].map(item => ({
                 value: [
-                    new Date(item.start_at).getTime(), // Start time in milliseconds
-                    new Date(item.end_at || new Date(item.start_at).getTime() + 600000).getTime(), // End time or start time + default duration
+                    new Date(item.date).getTime(), // Date in milliseconds
+                    item.weight_kg || item.height_cm, // Weight or height value  
                     0 // Category index
                 ],
                 itemStyle: {
-                    color: 
-                        item.Type === 'Sleep' ? '#bfdbf7' : 
-                        item.Type === 'Feed' ? '#488f96' : 
-                        item.Type === 'Diaper' ? '#ffc857' : 
-                        '#923d59'
+                    color: '#488f96'  
                 },
-                name: item.Type,
-                end_condition: item['End Condition']
-            }))
+                name: item.weight_kg ? 'Weight (kg)' : 'Height (cm)'
+            }))  
         }]
     }}
     height="{height}px"
