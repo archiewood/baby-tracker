@@ -12,8 +12,16 @@ select
   "End Condition",
   notes,
   case
-    when "Type" = 'Growth' then cast(split_part("Start Condition", ' ', 1) as decimal)
+    when "Type" = 'Growth' then cast(split_part("Start Condition", 'kg', 1) as decimal)
     else null 
-  end as weight_kg
+  end as weight_kg,
+  case
+    when "Type" = 'Growth' then cast(split_part(split_part("Start Condition", 'kg', 2), 'cm', 1) as decimal)
+    else null
+  end as length_cm,
+  case
+    when "Type" = 'Growth' then cast(split_part(split_part("Start Condition", 'cm', 2), 'cm', 1) as decimal) 
+    else null
+  end as head_circumference_cm  
 from events
 GROUP BY all
