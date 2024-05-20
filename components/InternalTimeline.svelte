@@ -57,14 +57,11 @@
       trigger: "item",
       formatter: function (params) {
         // Convert timestamps back to more readable time strings (HH:MM)
-        var options = { hour: "2-digit", minute: "2-digit" };
-        var startDate = new Date(params.value[0]).toLocaleTimeString(
-          [],
-          options
-        );
+        var options = { hour: "numeric", minute: "2-digit", hour12: false };
+        var startDate = new Date(params.value[0]).toLocaleTimeString([], options);
         var endDate = new Date(params.value[1]).toLocaleTimeString([], options);
         var duration = (params.value[1] - params.value[0]) / 1000 / 60; // Duration in minutes
-        return `<b>${params.name}</b><br/>Start: ${startDate}<br/>End: ${endDate}<br/>Duration: ${duration} minutes<br/>Notes: ${params.data.end_condition}`;
+        return `<b>${params.name}</b><br/>${startDate} - ${endDate}<br/>(${duration} mins)<br/>Notes: ${params.data.end_condition}`;
       },
     },
     series: [
