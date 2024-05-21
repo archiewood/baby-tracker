@@ -7,6 +7,8 @@ og:
   image: /screengrab.png
 ---
 
+<LastRefreshed/>
+
 This project ingests and displays data from the [Huckleberry App](https://huckleberrycare.com/). It compares the data to targets and guidelines recommended by health professionals.
 
 ```sql total_days
@@ -85,18 +87,11 @@ limit ${inputs.days_limit.value}
 ```
 
 
-<Dropdown name=days_limit value=3 title="Data Range">
+<Dropdown name=days_limit value=3 title="Data Range" defaultValue=3>
   <DropdownOption value=3 valueLabel="Last 3 days"/>
   <DropdownOption value=7 valueLabel="Last 7 days"/>
   <DropdownOption value=14 valueLabel="Last 14 days"/>
 </Dropdown>
-  
-  
-
-
-
-
-
 
 {#each last_3_days as row, i}
 

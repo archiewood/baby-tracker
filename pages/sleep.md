@@ -5,6 +5,8 @@ queries:
   - events.sql
 ---
 
+<LastRefreshed/>
+
 The National Sleep Foundation recommends [11-19 hours of sleep per day for newborns](https://www.sleepfoundation.org/baby-sleep), dropping to 12-16 hours per day for infants aged 4-6 months
 
 ```sql dates
@@ -150,3 +152,53 @@ group by sleep_type
     yAxisTitle=false
     yFmt=num1
 />
+
+```sql sleep_night_vs_day_kpis
+select
+    date_trunc('day', start_at - interval '4 hours') as day,
+    sum(duration) as total_minutes,
+    sum(duration) / 60 as total_hours,
+    count(*) as number_of_sleeps,
+    total_minutes / number_of_sleeps as avg_minutes_per_sleep,
+    sleep_type
+from ${events}
+where type = 'Sleep'
+and day between '${inputs.date_range.start}' and '${inputs.date_range.end}'
+group by all
+```
+
+### Night
+
+<LineChart
+    data={sleep_night_vs_day_kpis.where(`sleep_type = 'Night'`)}
+    x=day
+    y=avg_minutes_per_sleep
+    yGridlines=false
+    yAxisLabels=false
+    yAxisTitle=false
+    yFmt=num0
+    labels
+    y2=number_of_sleeps
+    y2Gridlines=false
+    y2AxisLabels=false
+    y2AxisTitle=false
+/>
+
+### Day
+
+<LineChart
+    data={sleep_night_vs_day_kpis.where(`sleep_type = 'Day'`)}
+    x=day
+    y=avg_minutes_per_sleep
+    yGridlines=false
+    yAxisLabels=false
+    yAxisTitle=false
+    yFmt=num0
+    labels
+    y2=number_of_sleeps
+    y2Gridlines=false
+    y2AxisLabels=false
+    y2AxisTitle=false
+/>
+
+
