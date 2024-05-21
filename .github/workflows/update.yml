@@ -47,12 +47,9 @@ jobs:
         git commit -m "Update CSV $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
         git push -u origin scheduled-update --force
 
-    # Open a pull request with the changes
-    - name: Create Pull Request
-      uses: repo-sync/pull-request@v2
-      with:
-        source_branch: "scheduled-update"
-        destination_branch: "main"  # or any base branch you use
-        pr_title: "Updated CSV with latest data"
-        pr_body: "Please review the changes to the CSV file."
-        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    - name: Merge to Main Branch
+      run: |
+        git fetch origin
+        git checkout main
+        git merge scheduled-update --no-ff -m "Merge scheduled update into main"
+        git push origin main
