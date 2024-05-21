@@ -60,7 +60,7 @@ group by type
 
 {/if}
 
-{:else}
+{:else if row.Type !== 'Growth'}
 
 <BigValue
   data={row}
