@@ -18,7 +18,7 @@ group by day
 
 ```sql sleep_by_day
 select
-    date_trunc('day', start_at) as day,
+    date_trunc('day', start_at - interval 4 hours) as day,
     sum(duration) as total_minutes,
     sum(duration) / 60 as total_hours,
 from ${events}
@@ -76,7 +76,7 @@ where actual.day between '${inputs.date_range.start}' and '${inputs.date_range.e
 
 ```sql sleep_kpis
 select
-    date_trunc('day', start_at) as day,
+    date_trunc('day', start_at - interval '4 hours') as day,
     sum(duration) as total_minutes,
     sum(duration) / 60 as total_hours,
     count(*) as number_of_sleeps,
@@ -108,7 +108,7 @@ group by day
 
 ```sql sleep_night_vs_day
 select
-    date_trunc('day', start_at) as day,
+    date_trunc('day', start_at - interval '4 hours') as day,
     sum(duration) as total_minutes,
     sum(duration) / 60 as total_hours,
     sleep_type
@@ -139,9 +139,6 @@ group by sleep_type
 
 
 
-
-
-
 <BarChart
     data={sleep_night_vs_day}
     x=day
@@ -151,5 +148,5 @@ group by sleep_type
     yGridlines=false
     yAxisLabels=false
     yAxisTitle=false
-    yFmt=num0
+    yFmt=num1
 />
