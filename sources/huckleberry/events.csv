@@ -1,4 +1,7 @@
 "Type","Start","End","Duration","Start Condition","Start Location","End Condition","Notes"
+"Feed","2024-06-01 13:20",,,"Breast Milk","Bottle","60ml",
+"Sleep","2024-06-01 12:40","2024-06-01 13:12","00:32",,,,
+"Feed","2024-06-01 11:15","2024-06-01 11:30","00:15","Null r","Breast","00:15L",
 "Sleep","2024-06-01 10:34","2024-06-01 11:10","00:36",,,,
 "Feed","2024-06-01 09:36","2024-06-01 09:46","00:10","Null r","Breast","00:10L",
 "Feed","2024-06-01 08:54",,,"Breast Milk","Bottle","65ml",
