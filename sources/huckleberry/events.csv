@@ -1,4 +1,6 @@
 "Type","Start","End","Duration","Start Condition","Start Location","End Condition","Notes"
+"Diaper","2024-06-02 11:30",,,,,"Poo:large",
+"Sleep","2024-06-02 09:30","2024-06-02 10:20","00:50",,,,
 "Feed","2024-06-02 08:39",,,"Breast Milk","Bottle","15ml",
 "Sleep","2024-06-02 07:30","2024-06-02 08:21","00:51",,,,
 "Feed","2024-06-02 07:16","2024-06-02 07:22","00:06","Null r","Breast","00:06L",
