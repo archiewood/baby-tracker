@@ -1,5 +1,6 @@
 "Type","Start","End","Duration","Start Condition","Start Location","End Condition","Notes"
 "Feed","2024-11-30 21:15",,,"Formula","Bottle","30ml",
+"Sleep","2024-11-30 20:00","2024-12-01 06:22","10:22",,,,
 "Feed","2024-11-30 19:41",,,"Formula","Bottle","120ml",
 "Feed","2024-11-30 19:14",,,"Formula","Bottle","170ml",
 "Sleep","2024-11-30 18:32","2024-11-30 19:09","00:37",,,,
